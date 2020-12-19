@@ -2,11 +2,11 @@ import React from 'react'
 import './song.styles.scss'
 
 
-const Song = () => (
+const Song = ({name,cover,artist,isPlaying}) => (
     <div className="song-container">
-        <h1>Picture</h1>
-        <h1>Song</h1>
-        <h1>Artist</h1>
+        <img className={`${isPlaying?"":""}`} src={cover} alt=""/>
+        <h2 className="name">{name}</h2>
+        <div className="artist">{artist}</div>
     </div>
 )
 

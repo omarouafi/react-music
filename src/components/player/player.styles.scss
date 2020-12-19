@@ -1,0 +1,39 @@
+.player{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .time-control{
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        p{    
+            padding: 0rem .1rem;
+        }   
+        input{
+            width: 85%;
+        }
+    }
+
+    .play-control{
+        width: 30%;
+        display: flex;
+        justify-content:space-between;
+        margin: 3rem 2rem;
+        align-items: center;
+
+        svg{
+            cursor: pointer;
+            path{
+
+                fill:rgb(19, 16, 16);
+            }
+        }
+
+        
+    }
+
+
+
+}

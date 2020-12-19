@@ -1,4 +1,39 @@
 .song-container{
-    background-color: rgb(29, 97, 119);
     height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .name{
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: .3rem;
+    }
+    .artist{
+        color: rgba(0, 0, 0, 0.452);
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+
+    img{
+        display: inline-block;
+        width: 15rem;
+        border-radius: 50%;
+    }
+
+    .animated-img{
+        animation: rolling 36s infinite linear;
+        
+        @keyframes rolling {
+            
+            0%{
+                transform: rotate(0);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+            
+        }
+    }
 }
