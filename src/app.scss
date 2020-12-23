@@ -6,9 +6,21 @@
 
 body{
     font-family: 'Lato', sans-serif;
+    
 }
 
 h1,h2,h3{
     color: rgb(58, 58, 58);
-    
 }
+
+
+.App{
+    transition: all .4s ease-in-out;
+}
+
+.collapse{
+
+    margin: 2rem 0;
+    margin-left: 18rem;
+}
+

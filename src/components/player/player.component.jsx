@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlay,faPause,faAngleLeft,faAngleRight} from '@fortawesome/free-solid-svg-icons'
 
 
-const Player = ({audioRef,timeStamp,setTimeState,isPlaying,setisPlaying}) => {
+const Player = ({songs,currentSong,setCurrentSong,audioRef,timeStamp,setTimeState,isPlaying,setisPlaying}) => {
     
     const handlePlay = e => {
         if (isPlaying) {
@@ -15,12 +15,23 @@ const Player = ({audioRef,timeStamp,setTimeState,isPlaying,setisPlaying}) => {
             setisPlaying(!isPlaying)
         }
     }
-    
+
    
     const getTime = (time) => {
         let seconds = Math.floor(time%60)+""
         seconds = seconds.length === 1 ? `0${seconds}`:seconds
         return Math.floor(time/60) + ":" + seconds
+    }
+
+
+    const handleSkip = (skip) => {
+        const Currentindex = songs.findIndex(song=>song.id === currentSong.id)
+        if (skip === "+") {
+            setCurrentSong(songs[(Currentindex+1)%songs.length])
+        }else{
+            Currentindex === 0? setCurrentSong(songs[songs.length-1]) :setCurrentSong(songs[Currentindex-1])
+
+        }
     }
 
 
@@ -30,22 +41,26 @@ const Player = ({audioRef,timeStamp,setTimeState,isPlaying,setisPlaying}) => {
         setTimeState({...timeStamp,currentTime:value})
     }
 
-    const {currentTime,duration} = timeStamp
+    const {currentTime,duration,progress} = timeStamp
 
     return(
 
         <div className="player">
             <div className="time-control">
                 <p>{getTime(currentTime)}</p>
-                <input onChange={handleDrag} min={0} max={duration} value={currentTime} type="range"/>
+                <div className="track" style={{backgroundImage:`linear-gradient(90deg,${currentSong.colors[0]},${currentSong.colors[1]})`}}>
+                    <input onChange={handleDrag} min={0} max={duration || 0} value={currentTime} type="range"/>
+                    <div style={{transform:`translateX(${progress}%)`}} className="animated-track"></div>
+                </div>
                 <p>{getTime(duration)}</p>
             </div>
             <div className="play-control">
-                <FontAwesomeIcon className="play-control__play" size="2x" icon={faAngleLeft}/>
-                <div className="play-icon">
+                <FontAwesomeIcon onClick={handleSkip} className="play-control__play" size="2x" icon={faAngleLeft}/>
+                
                     <FontAwesomeIcon onClick={handlePlay} className="play-control__play" size="2x" icon={isPlaying?faPause:faPlay}/>
-                </div>
-                <FontAwesomeIcon className="play-control__play" size="2x" icon={faAngleRight}/>
+                   
+                
+                <FontAwesomeIcon onClick={ () =>  handleSkip("+")} className="play-control__play" size="2x" icon={faAngleRight}/>
             </div>
         </div>
 )}
